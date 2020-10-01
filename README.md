@@ -34,10 +34,12 @@ sudo setfacl -m user:$USER:rw /var/run/docker.sock
 
 # install hadoop
 
+[ref]https://phoenixnap.com/kb/install-hadoop-ubuntu
+
 # install spark
 
-# install kafka
 
+# install kafka
 
 ## sink test
 ```
@@ -52,7 +54,7 @@ kafka-avro-console-producer --broker-list localhost:9092 --topic table1 --proper
 {"id":999,"product":"foo","quantity":100,"price":50}
 ```
 
-when changing schema,
+[Notice] when changing schema,
 '''
 curl -X PUT http://localhost:8081/config/table1-value -d '{"compatibility":"NONE"}' -H "Content-Type:application/json"
 '''

@@ -1,20 +1,19 @@
 #!/bin/bash
 
-# sudo apt-get -y update
-# sudo apt-get -y upgrade
+sudo apt-get -y update
+sudo apt-get -y upgrade
 JAVA_PATH=$(readlink -f /usr/bin/java | sed "s:bin/java::")
-HADOOP_PATH='/opt/hadoop-2.10.1/'
-sudo wget http://apache.mirror.cdnetworks.com/hadoop/common/hadoop-2.10.1/hadoop-2.10.1.tar.gz -O /opt/hadoop.tar.gz
+HADOOP_PATH='/opt/hadoop-2.7.4/'
+sudo wget https://archive.apache.org/dist/hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz -O /opt/hadoop.tar.gz
 sudo tar -zxvf /opt/hadoop.tar.gz -C /opt/
 
 
 
 # sudo apt-get remove -y openssh-client openssh-server
 sudo apt-get install -y openssh-client openssh-server openjdk-8-jdk-headless
-
-
-sudo mkdir -p /tmp/hadoop/tmpdata
-sudo mkdir -p /mnt/hadoop/dfsdata
+sudo chown -R user:user /opt/hadoop-2.7.4/  
+# sudo mkdir -p /tmp/hadoop/tmpdata
+# sudo mkdir -p /mnt/hadoop/dfsdata
 
 if grep -Fxq 'export JAVA_HOME="'$JAVA_PATH'"' ~/.bashrc 
 then 
@@ -45,15 +44,21 @@ fi
 
 source ~/.bashrc 
 
-sudo cp ../modified_setting/*.xml $HADOOP_HOME/etc/hadoop/
-sudo cp ../modified_setting/hadoop-env.sh $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+sudo cp ../modified_setting/*.xml $HADOOP_PATH/etc/hadoop/
+sudo cp ../modified_setting/hadoop-env.sh $HADOOP_PATH/etc/hadoop/hadoop-env.sh
     
-
-
-
 hdfs namenode -format
 
-./start-dfs.sh &
-./start-yarn.sh &
-jps &
-# http://localhost:9870
+# ./start-dfs.sh &
+# ./start-yarn.sh &
+# jps &
+# # http://localhost:9870
+
+
+# sudo useradd hadoop
+# sudo passwd hadoop
+
+# su - hadoop 
+# ssh-keygen -t rsa
+# cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+

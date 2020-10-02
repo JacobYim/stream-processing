@@ -68,3 +68,8 @@ export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native
 export PYSPARK_PYTHON=/usr/bin/python3
 export PYSPARK_DRIVER_PYTHON=/usr/bin/python3
 export SPARK_MASTER_HOST=localhost
+
+export SPARK_WORKER_INSTANCES=1
+export SPARK_WORKER_MEMORY=8192m
+export SPARK_WORKER_CORES=8
+export SPARK_MASTER_OPTS="-Dspark.deploy.defaultCores=5"

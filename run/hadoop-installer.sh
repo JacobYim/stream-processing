@@ -4,6 +4,11 @@ sudo apt-get -y update
 sudo apt-get -y upgrade
 JAVA_PATH=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 HADOOP_PATH='/opt/hadoop-2.7.4/'
+
+ssh-keygen -t rsa -P ""
+cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
+ssh localhost
+
 sudo wget https://archive.apache.org/dist/hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz -O /opt/hadoop.tar.gz
 sudo tar -zxvf /opt/hadoop.tar.gz -C /opt/
 

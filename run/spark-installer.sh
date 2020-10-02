@@ -2,7 +2,7 @@
 
 sudo wget http://archive.apache.org/dist/spark/spark-2.2.2/spark-2.2.2-bin-hadoop2.7.tgz -O /opt/spark.tar.gz
 sudo tar -zxvf /opt/spark.tar.gz -C /opt/
-
+sudo chown -R user:user /opt/
 sudo chown -R user:user /opt/spark-2.2.2-bin-hadoop2.7/  
 
 sudo echo 'export SPARK_HOME=/opt/spark-2.2.2-bin-hadoop2.7' >> ~/.bashrc

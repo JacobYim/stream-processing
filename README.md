@@ -38,7 +38,8 @@ sudo setfacl -m user:$USER:rw /var/run/docker.sock
 
 # install spark
 
-
+[ref] https://glow153.tistory.com/16
+[ref] https://dorongee.tistory.com/3?category=689596
 # install kafka
 
 ## sink test
@@ -68,3 +69,66 @@ kafka-avro-console-consumer --bootstrap-server localhost:9092 --topic table1 --f
 
 
 [ref]https://docs.confluent.io/3.3.0/installation/installing_cp.html
+
+
+
+# take stream kafka to spark
+```
+pyspark --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.2.3,org.apache.spark:spark-sql-kafka-0-10_2.11:2.2.3
+
+import pyspark
+from pyspark import RDD
+from pyspark import SparkContext
+from pyspark.streaming import StreamingContext
+from pyspark.streaming.kafka import KafkaUtils
+import json#Spark context details
+
+#sc = SparkContext(appName="PythonSparkStreamingKafka")
+ssc = StreamingContext(sc,2) #Creating Kafka direct stream
+
+dks = KafkaUtils.createDirectStream(ssc, ["test"], {"metadata.broker.list":"localhost:9092"})
+
+counts = dks.pprint()
+
+ssc.start()
+
+ssc.awaitTermination()
+
+# producer 
+kafka-console-producer --broker-list localhost:9092 --topic test
+
+# 
+kafka-topics --list --zookeeper localhost:2181
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic mytopic --from-beginning
+
+```
+
+```
+<!-- sc = SparkContext(appName='PythonStreamingQueue') -->
+import pyspark
+from pyspark import RDD
+from pyspark import SparkContext
+from pyspark.streaming import StreamingContext
+
+ssc = StreamingContext(sc, 1)
+
+# Create the queue through which RDDs can be pushed to
+# a QueueInputDStream
+rddQueue = []
+for _ in range(5):
+    rddQueue += [ssc.sparkContext.parallelize([j for j in range(1, 1001)], 10)]
+
+# Create the QueueInputDStream and use it do some processing
+inputStream = ssc.queueStream(rddQueue)
+mappedStream = inputStream.map(lambda x: (x % 10, 1))
+reducedStream = mappedStream.reduceByKey(lambda a, b: a + b)
+reducedStream.pprint()
+
+ssc.start()
+time.sleep(6)
+ssc.stop(stopSparkContext=True, stopGraceFully=True) 
+```
+
+
+[ref]https://medium.com/@sandeepkattepogu/streaming-data-from-apache-kafka-topic-using-apache-spark-2-4-5-and-python-4073e716bdca

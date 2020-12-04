@@ -132,3 +132,6 @@ ssc.stop(stopSparkContext=True, stopGraceFully=True)
 
 
 [ref]https://medium.com/@sandeepkattepogu/streaming-data-from-apache-kafka-topic-using-apache-spark-2-4-5-and-python-4073e716bdca
+
+# make dockerfile for kafka, hadoop and elasticsearch
+

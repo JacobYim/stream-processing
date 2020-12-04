@@ -11,8 +11,7 @@ WORKDIR /home
 COPY modified_setting modified_setting
 COPY run_docker run_docker
 
-RUN cd run_docker && ./hadoop-installer.sh
+RUN cd run_docker && ./hadoop-installer.sh && ./spark-installer.sh
+# RUN cd run_docker && ./spark-installer.sh
 
 RUN bash -c "source ~/.bashrc"
-# RUN /etc/init.d/ssh start 
-CMD [ "sh", "/etc/init.d/ssh", "start"]

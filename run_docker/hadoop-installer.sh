@@ -49,17 +49,9 @@ cp ../modified_setting/hadoop-env.sh $HADOOP_PATH/etc/hadoop/hadoop-env.sh
     
 # /etc/init.d/ssh start 
 # hdfs namenode -format
-# ./start-dfs.sh &
-# ./start-yarn.sh &
+# start-dfs.sh 
+# start-yarn.sh 
 # jps &
 
-# # http://localhost:9870
-
-
-# sudo useradd hadoop
-# sudo passwd hadoop
-
-# su - hadoop 
-# ssh-keygen -t rsa
-# cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-
+# sudo docker build --tag test .
+# sudo docker run -it --rm --net host --name test test bash

@@ -135,3 +135,17 @@ ssc.stop(stopSparkContext=True, stopGraceFully=True)
 
 # make dockerfile for kafka, hadoop and elasticsearch
 
+```
+sudo docker build --tag test .
+sudo docker run -it --rm --net host --name test test bash
+```
+```
+/etc/init.d/ssh start 
+hdfs namenode -format
+start-dfs.sh 
+start-yarn.sh 
+start-master.sh
+start-slaves.sh
+
+jps
+```

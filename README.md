@@ -149,3 +149,9 @@ start-slaves.sh
 
 jps
 ```
+
+```
+sudo docker build --tag instance .
+sudo docker run -it --rm -p 9200:9200 -p 9300:9300 -p 5601:5601 -p 5432:5432 -p 9092:9092 -p 4040:4040 -p 18080:18080 -p 18081:18081 -p 8020:8020 -p 50072:50072 -p 9000:9000 -p 50070:50070 -p 50470:50470 --name instance instance 
+
+```

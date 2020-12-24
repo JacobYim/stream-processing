@@ -11,7 +11,7 @@ apt-get -y update && apt-get -y install elasticsearch
 # install kibana
 apt-get -y install kibana
 # /etc/init.d/kibana start
-cp ../modified_setting/elastic/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
-cp ../modified_setting/elastic/kibana.yml /etc/kibana/kibana.yml
+# cp ../modified_setting/elastic/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
+# cp ../modified_setting/elastic/kibana.yml /etc/kibana/kibana.yml
 # test elasticsearch run
 # curl -XGET 'localhost:9200/?pretty'
